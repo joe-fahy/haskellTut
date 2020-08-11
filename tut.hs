@@ -189,3 +189,28 @@ evensUpTo20 = takeWhile (<=20) [2,4..]
 
 --This command multiplies everything in the list together from the left(foldl), or the right(foldr)
 multOfList = foldl (*) 1 [1,2,3,4,5]
+
+--This creates a list where each list elem is 3^n where n is the index of the list.
+pow3List = [3^n| n <- [1..10]]
+
+--Here is a multiplication table(1-10 times tables)
+multTable = [[x*y |x <- [1..10]] | y <- [1..10]]
+
+--Tuples are used a lot in Haskell...
+--A tuple is a pair
+--In a list every item has to have the same data type, in a tuple this doesnt have to be true.
+randTuple = (1,"Random Tuple")
+
+--Here is a tuple with name and age...
+bobSmith = ("Bob Smith" , 52)
+
+--This is how we get bobs name..
+bobsName = fst bobSmith
+
+--This is how we get bobs age..
+bobsAge = snd bobSmith
+
+--We can also use zip to combine values from 2 different lists into tuple pairs..
+names = ["John","Mary","Sean"]
+addresses = ["14 Main Street","22 Well Road","1 Clyde Avenue"]
+namesAndAdresses = zip names addresses
