@@ -214,3 +214,73 @@ bobsAge = snd bobSmith
 names = ["John","Mary","Sean"]
 addresses = ["14 Main Street","22 Well Road","1 Clyde Avenue"]
 namesAndAdresses = zip names addresses
+
+--Here is a function in Haskell
+main = do
+    putStrLn "What's your name?"
+    name <- getLine
+    putStrLn ("Hello "++name)
+
+--Note...In haskell functions cannot begin with an upper case letter.
+
+--First, lets create a type declaration for this function...
+addMe :: Int -> Int -> Int 
+
+--Functions in Haskell take the following format...
+-- funcName param1 param2 = operations (output value, or returned value)
+--Here is the addMe function which adds 2 numbers...
+addMe x y = x + y 
+
+--If we create a function without a type declaration, then we are not held to just Ints...
+sumMe x y = x + y 
+
+--We can create a function to add tuples together..
+addTuples (x,y) (x2,y2) = (x+x2,y+y2)
+
+--We can create like an if block in Haskell...
+--First the type declaration...
+whatAge :: Int -> String
+
+
+--This section of code acts like an if-else block...
+whatAge 17 = "You can drive"
+whatAge 18 = "You can Vote"
+whatAge 25 = "You're insurance is cheaper"
+whatAge x = "Nothing Important"
+
+--Write a program to calculate the factorial of n...
+--Use recursion...
+
+--Type Decalaration
+factorial :: Int -> Int
+
+--First handle the case for 0.
+factorial 0 = 1
+
+--Next the main recursive part of the algorithm...
+factorial n = n * factorial(n-1)
+
+--Here is a simpler way of calculating factorials in Haskell...
+--We can use the product function...
+prodFact n = product [1..n]
+
+--Next, a function to check if a number is odd, using guards...
+
+--First, the type declaration...    
+isOdd :: Int -> Bool
+
+isOdd n
+    |n `mod` 2 == 0 = False
+    |otherwise = True
+
+
+--Here is another use of guards in Haskell...
+--This is a function to find class based on age...
+--First the type declaration...
+whatClass :: Int -> String
+
+whatClass age
+    |(age >= 4) && (age <= 6) = "Kindergarten"
+    |(age >= 7) && (age <= 12) = "Primary School"
+    |(age >= 12) && (age <= 18) = "Secondary School"
+    |otherwise = "Go to college"
