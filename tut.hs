@@ -284,3 +284,18 @@ whatClass age
     |(age >= 7) && (age <= 12) = "Primary School"
     |(age >= 12) && (age <= 18) = "Secondary School"
     |otherwise = "Go to college"
+
+--Here is a program to calculate baseball batting average...
+
+--First a type declaration...
+batAvgRating :: Double -> Double -> String
+
+--Now the body or logic of the function...
+--We will use guards for this function...
+batAvgRating hits atBats
+    
+    |(avg <= 0.200) = "You are terrible at batting."
+    |(avg <= 0.250) = "You are decent."
+    |(avg <= 0.280) = "You are good."
+    |otherwise "You're a superstar."
+    where avg = hits / atBats
