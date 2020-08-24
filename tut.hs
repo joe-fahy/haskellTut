@@ -382,3 +382,54 @@ threePlusList = map adds3 [1,2,3,4,5]
 --In this example \x is what the lambda takes in.
 --And [1..10] means perform this function from 1-10.
 dbl1To10 = map (\x -> x*2) [1..10]
+
+--Here is an example of if statements in Haskell...
+--This is a function to only double even numbers.
+doubleEvenNumber y = 
+    if(y `mod` 2 /= 0)
+        then y
+        else y*2
+
+--Here is an example of a switch statement or case statement.
+--First the func type declaration.
+getClass :: Int -> String
+
+--Next the actual function logic...
+--In this example the underscore(_) represents any other input which we dont want.
+getClass x = 
+    case x of
+        5-> "Go to Kindergarten."
+        6-> "Go to elementary school."
+        _-> "Go away."
+
+--Numeration types are used to create a list of possible types.
+--So this baseball example was an example of an enumerated data type.
+--Enumerated data types create a list of possible outcomes to choose from.
+data BaseballPlayer = Pitcher
+                    |Catcher
+                    |Infielder
+                    |Outfield
+                    deriving Show
+
+barryBonds :: BaseballPlayer -> Bool
+
+barryBonds Outfield = True
+
+barryInOF = print(barryBonds Outfield)
+
+
+--Now here is an example of a custom data type.
+--A custom data type can be thought of like a struct. It can store multiple values.
+--Here is an example of customer data...
+data Customer = Customer String String Double
+    deriving Show
+
+tomSmith :: Customer 
+tomSmith = Customer "Tom Smith" "123 Main" 20.50
+
+--This is a method to get the balance from a customer data type.
+getBalance :: Customer -> Double
+
+--This line says go to Customer, ignore the first 2 data entries and only get balance.
+--Here balance is represented by b.
+getBalance (Customer _ _ b) = b
