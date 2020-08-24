@@ -288,14 +288,97 @@ whatClass age
 --Here is a program to calculate baseball batting average...
 
 --First a type declaration...
-batAvgRating :: Double -> Double -> String
+--batAvgRating :: Double -> Double -> String
 
 --Now the body or logic of the function...
 --We will use guards for this function...
-batAvgRating hits atBats
-    
-    |(avg <= 0.200) = "You are terrible at batting."
-    |(avg <= 0.250) = "You are decent."
-    |(avg <= 0.280) = "You are good."
-    |otherwise "You're a superstar."
-    where avg = hits / atBats
+--batAvgRating hits atBats
+--    |avg <= 0.200 = "You are terrible at batting."
+--    |avg <= 0.250 = "You are decent."
+--    |avg <= 0.280 = "You are good."
+--    |otherwise "You're a superstar."
+--    where avg = hits / atBats
+--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+--Here is a function to get items from a list that was passed in.
+--First create a type declaration.
+getListItems :: [Int] -> String
+
+--Next handle the case for an empty list.
+getListItems [] = "Your list is empty."
+getListItems (x:[]) = "Your list starts with " ++ show x
+getListItems (x:y:[]) = "Your list starts with " ++ show x ++ " and " ++ show y
+getListItems (x:xs) = "Your first item is " ++ show x++ "and the rest are "  ++ show xs
+
+
+--This is a function to get the first letter of a string.
+--First create a type declaration
+getFirstItem :: String -> String
+
+--Now function logic
+getFirstItem [] = "Empty String"
+getFirstItem all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x] 
+
+--Next we move on to higher order functions.
+--This sounds complicated, but all it does is passes functions in like regular variables.
+--First the type declaration...
+times4 :: Int -> Int
+
+--Next the function logic...
+times4 x = x*4
+
+--the map function allows you to apply a function to every item in a list.
+listTimes4 = map times4 [1,2,3,4,5]
+
+--This function will take in a list of ints and perform an operation on them and then return a list of ints.
+multBy4 :: [Int] -> [Int]
+--This line handles the case of an empty input string.
+multBy4 [] = []
+
+--This line cycles through the list and multiplies the rest of the list items.
+multBy4 (x:xs) = times4 x : multBy4 xs 
+
+--This is a function to check if two strings are equal.
+--First write the type declaration..
+areStringsEq :: String -> String -> Bool
+
+--Next handle the blank input case.
+areStringsEq [] [] = True
+
+--Next the main function logic.
+areStringsEq (x:xs) (y:ys) = x == y && areStringsEq xs ys
+
+--Finally catch all other input that is not a string or empty list.
+areStringsEq _ _ = False
+
+--Here we can pass a function into a function.
+--First the type Declaration.
+doMult :: (Int -> Int) -> Int
+
+--This logic states that the function is passed in, then 3 is given as an arg to the function.
+doMult func = func 3
+
+--Testing the function out....
+num3Times4 = doMult times4
+
+--We can also write a function which returns a function.
+--First the type declaration.
+getAddFunc :: Int -> (Int -> Int)
+
+--Logic for add function.
+getAddFunc x y = x+y
+
+adds3 = getAddFunc 3
+
+fourPlus3 = adds3 4
+
+--We can also use this technique with the map function.
+threePlusList = map adds3 [1,2,3,4,5]
+
+--Lambdas are like functions that don't have a name.
+--Here is a simple example of a lambda.
+--In this example \x is what the lambda takes in.
+--And [1..10] means perform this function from 1-10.
+dbl1To10 = map (\x -> x*2) [1..10]
