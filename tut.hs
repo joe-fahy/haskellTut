@@ -433,3 +433,96 @@ getBalance :: Customer -> Double
 --This line says go to Customer, ignore the first 2 data entries and only get balance.
 --Here balance is represented by b.
 getBalance (Customer _ _ b) = b
+
+
+--We can create another example to make a rock,paper,scissors game.
+--First lets create an enumerated data type.
+data RPS = Rock | Paper | Scissors
+
+--Now a function to run our program.
+--Here is the type declaration for the function...
+shoot :: RPS -> RPS -> String
+
+--Now the program logic for each scenario.
+shoot Paper Rock = "Paper beats Rock."
+shoot Rock Scissors = "Rock beats Scissors."
+shoot Scissors Paper = "Scissors beats Paper."
+shoot Scissors Rock = "Rock beats Scissors."
+shoot Paper Scissors = "Scissors beats Paper."
+shoot Rock Paper = "Paper beats Rock."
+shoot _ _ = "Error."
+
+
+
+--In this example we create a shape data type which has different categories with different arguments.
+data Shape = Circle Float Float Float | Rectangle Float Float Float Float
+    deriving Show
+
+--Now lets create a method to get the area of a shape.
+--First lets create a type declaration.
+area :: Shape -> Float
+
+--Now lets create the function logic.
+
+--This line of code parses out the radius from the Circle data type, then calcs pi*r^2.
+area (Circle _ _ r) = pi * (r^2)
+
+--Now here is the area calculation for the rectangle.
+--Important to note here: abs is the absolute value function(result is always positive num)
+area (Rectangle x1 y1 x2 y2) = (abs (x2 - x1)) * (abs(y2-y1))
+
+
+--Here we call the function and put the result in a constant.
+areaOfCircle = area (Circle 10 20 20)
+
+--Note here, the dollar sign ($) is just used as a replacement for the brackets in the example above.
+--These examples both function exactly the same.
+areaOfRectangle = area $ Rectangle 10 20 30 40
+
+--Now we will look at type classes...
+--Type classes are things like Num Or Eq Show
+--Type classes will correspond with certain types which have certain operations defined for them.
+--For example the addition operator(+) works with parameters that use Num
+--This can be seen by typing :t (+) in ghci
+--What this means is that as long as the params we pass in extend the type class Num
+--ie. Int Double Float etc....
+--We can add them using the addition operator.
+
+--Here is a custom data type using types.
+--This is a data type for employees.
+data Employee = Employee { name :: String,
+                            position :: String,
+                            idnum :: Int
+                            } deriving(Eq,Show)
+
+samSmith = Employee {name = "Sam Smith" , position = "Manager" , idnum = 1000}
+pamMarx = Employee {name = "Pam Marx" , position = "Sales", idnum = 1001} 
+
+--Here is a function to check if the 2 are equal.
+isSamPam = samSmith == pamMarx
+
+--Here is a function to show samSmith...
+samSmithData = show samSmith
+
+
+--Here is an example where we can use instances to control our class.
+
+--Create an enumerataed data type...
+data ShirtSize = S | M | L
+
+
+instance Eq ShirtSize where
+    S == S = True
+    M == M = True
+    L == L = True
+    _ == _ = False
+
+instance Show ShirtSize where
+    show S = "Small"
+    show M = "Medium"
+    show L = "Large"
+
+
+smallAvail = S `elem` [S,M,L]
+
+theSize = show S
