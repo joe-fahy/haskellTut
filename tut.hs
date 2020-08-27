@@ -526,3 +526,52 @@ instance Show ShirtSize where
 smallAvail = S `elem` [S,M,L]
 
 theSize = show S
+
+
+--We can also create a class for equality.
+class MyEq a where
+    areEqual :: a -> a -> Bool
+
+
+instance MyEq ShirtSize where
+    areEqual S S = True
+    areEqual M M = True
+    areEqual L L = True
+    areEqual _ _ = False
+
+
+newSize = areEqual M M     
+
+
+
+--Now lets look at I/O...
+--Lets make a custom function just to examine I/O operations...
+--This is a function to prompt for a name, then output the name.
+--Note: do allows us to chain a series of commands together.
+sayHello = do
+    putStrLn "Hello What is your name?"
+    name <- getLine
+    putStrLn $ "Hello " ++ name
+
+--Now lets look at file I/O
+--Here is writing to a file...
+writeToFile = do
+    theFile <- openFile "test.txt" WriteMode
+    hPutStrLn theFile ("A line of text.")
+    hClose theFile    
+
+--Here is a function that reads from the same file.
+readFromFile = do
+    theFile2 <- openFile "test.txt" ReadMode
+    contents <- hGetContents theFile2     
+    putStrLn contents
+    hClose theFile2
+
+
+--Here is a piece of code to calculate the fibonacci sequence using recursion and the zip function.
+--zip creates pairs from 2 lists and puts them into a tuple.
+
+fib = 1 : 1 : [a + b | (a,b) <- zip fib (tail fib)]
+
+--Here we get the 300th fibonacci number....
+fib300 = fib !! 300
